@@ -3,30 +3,31 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/BurntSushi/toml"
-	"github.com/zn/http-rest-api/internal/app/apiserver"
 	"log"
 	"os"
+
+	"github.com/BurntSushi/toml"
+	"github.com/zn/http-rest-api/internal/app/apiserver"
 )
 
-var(
+var (
 	configPath string
 )
 
-func init(){
+func init() {
 	flag.StringVar(&configPath, "config-path", fmt.Sprintf("configs%capiserver.toml", os.PathSeparator), "path to config file")
 }
 
-func main(){
+func main() {
 	flag.Parse()
 	config := apiserver.NewConfig()
 	_, err := toml.DecodeFile(configPath, config)
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 
-	s:= apiserver.New(config)
-	if err := s.Start(); err != nil{
+	s := apiserver.New(config)
+	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}
 }

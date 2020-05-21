@@ -1,18 +1,19 @@
 package apiserver
 
 import (
+	"io"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 	"github.com/zn/http-rest-api/internal/app/store"
-	"io"
-	"net/http"
 )
 
-type APIServer struct{
+type APIServer struct {
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
-	store *store.Store
+	store  *store.Store
 }
 
 func New(config *Config) *APIServer {
@@ -23,12 +24,12 @@ func New(config *Config) *APIServer {
 	}
 }
 
-func (s *APIServer) Start() error{
-	if err := s.configureLogger(); err != nil{
+func (s *APIServer) Start() error {
+	if err := s.configureLogger(); err != nil {
 		return err
 	}
 	s.configureRoute()
-	if err := s.configureStore(); err != nil{
+	if err := s.configureStore(); err != nil {
 		return err
 	}
 
@@ -36,30 +37,30 @@ func (s *APIServer) Start() error{
 	return http.ListenAndServe(s.config.BindAddr, s.router)
 }
 
-func (s *APIServer) configureLogger() error{
+func (s *APIServer) configureLogger() error {
 	level, err := logrus.ParseLevel(s.config.LogLevel)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	s.logger.SetLevel(level)
 	return nil
 }
 
-func (s *APIServer) configureRoute(){
+func (s *APIServer) configureRoute() {
 	s.router.HandleFunc("/hello", s.handleHello())
 }
 
-func (s *APIServer) configureStore() error{
+func (s *APIServer) configureStore() error {
 	st := store.New(s.config.Store)
-	if err := st.Open(); err != nil{
+	if err := st.Open(); err != nil {
 		return err
 	}
 	s.store = st
 	return nil
 }
 
-func (s *APIServer) handleHello() http.HandlerFunc{
-	return func(w http.ResponseWriter, r *http.Request){
+func (s *APIServer) handleHello() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "Hello!")
 	}
 }

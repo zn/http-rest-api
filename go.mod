@@ -12,6 +12,7 @@ require (
 	github.com/cznic/mathutil v0.0.0-20181122101859-297441e03548 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20200428022330-06a60b6afbbc // indirect
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
+	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
 	github.com/gocql/gocql v0.0.0-20200519160334-799061058e31 // indirect
 	github.com/golang-migrate/migrate/v4 v4.11.0 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
@@ -28,7 +29,7 @@ require (
 	github.com/stretchr/testify v1.5.1
 	github.com/xanzy/go-gitlab v0.31.0 // indirect
 	go.mongodb.org/mongo-driver v1.3.3 // indirect
-	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37 // indirect
+	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e // indirect
 	golang.org/x/mod v0.3.0 // indirect
 	golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2 // indirect
