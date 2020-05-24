@@ -20,6 +20,7 @@ require (
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/go-cmp v0.4.1 // indirect
 	github.com/gorilla/mux v1.7.4
+	github.com/gorilla/sessions v1.2.0
 	github.com/hashicorp/go-retryablehttp v0.6.6 // indirect
 	github.com/jackc/pgconn v1.5.0 // indirect
 	github.com/klauspost/compress v1.10.6 // indirect

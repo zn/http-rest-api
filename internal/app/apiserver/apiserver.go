@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/gorilla/sessions"
+
 	"github.com/zn/http-rest-api/internal/app/store/sqlstore"
 )
 
@@ -13,7 +15,8 @@ func Start(config *Config) error {
 		return err
 	}
 	store := sqlstore.New(db)
-	srv := newServer(store)
+	sessionStore := sessions.NewCookieStore([]byte(config.SessionKey))
+	srv := newServer(store, sessionStore)
 
 	return http.ListenAndServe(config.BindAddr, srv)
 }
@@ -23,7 +26,6 @@ func newDB(databaseURL string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
